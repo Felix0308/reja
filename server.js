@@ -16,17 +16,26 @@ app.set("views", "views"); // folderni ko'rsatilyapti.
 app.set("view engine", "ejs"); // view engine ajs ekankligini ko'rsatilyapti. ejs orqali backendni ichida frontendni yasaymiz.
 
 // 4 =>Routing code
-app.get("/hello", function(req, res) {
-    // res.end(`<h1 style="background: red">HELLO WORLD by Utkirbek</h1>`);
-    res.end(`<h1>HELLO WORLD</h1>`);
-});
-app.get("/gift", function (req, res) {
-  // res.end(`<h1 style="background: red">HELLO WORLD by Utkirbek</h1>`);
-  res.end(`<h1>Siz sovgalar bolimidasiz</h1>`);
+app.post("/create-item", (req, res) => {
+  console.log(req);
+  res.json({test: "success" });
 });
 
+app.get("/", function (req, res) {
+  res.render("harid");
+});
+
+// app.get("/hello", function(req, res) {
+//     // res.end(`<h1 style="background: red">HELLO WORLD by Utkirbek</h1>`);
+//     res.end(`<h1>HELLO WORLD</h1>`);
+// });
+// app.get("/gift", function (req, res) {
+//   // res.end(`<h1 style="background: red">HELLO WORLD by Utkirbek</h1>`);
+//   res.end(`<h1>Siz sovgalar bolimidasiz</h1>`);
+// });
+
 const server = http.createServer(app); // http serverimizni qurib olamiz.
-let PORT = 3001; // serverni 3001 PORTga liten qildik
+let PORT = 3001; // serverni 3001 PORTga listen qildik
 server.listen(PORT, function () {
     console.log(`The server is running successfully on port: ${PORT}`);
 }); // serverga pass qilinadi
