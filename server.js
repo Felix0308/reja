@@ -6,7 +6,7 @@ const http = require("http");
 // 1 => Kirish code. expressga kirib kelayotgan ma'lumotlarga bog'liq bo'lgan codelar yoziladi.
 app.use(express.static("public")); // => har qanday browserdan kirib kelayotgan zaproslar uchun public folderlar ochiq degan ma'noni anglatadi. Faqat public folderni ko'ra oladi.
 app.use(express.json()); // => kirib kelayotgan json formatdagi datani object holatiga o'girib beradi. client va webserver orasidagi data json format ko'rinishida.
-app.use(express.urlencoded({extended: true})); // => htmldan traditional form request qilish instrumenti. ya'ni formdan biror nimani post qilsak bizni express serverimiz qabul qilib oladi. agar bu code ni yozmasak html formdan post qilingan narsalarni express qabul qilmaydi, bserverga kiritmaydi.
+app.use(express.urlencoded({extended: true})); // => htmldan traditional form request qilish instrumenti. ya'ni formdan biror nimani post qilsak bizni express serverimiz qabul qilib oladi. agar bu code ni yozmasak html formdan post qilingan narsalarni express qabul qilmaydi, va serverga kiritmaydi.
 
 
 // 2 => Session code
@@ -35,7 +35,7 @@ app.get("/", function (req, res) {
 // });
 
 const server = http.createServer(app); // http serverimizni qurib olamiz.
-let PORT = 3001; // serverni 3001 PORTga listen qildik
+let PORT = 3000; // serverni 3001 PORTga listen qildik
 server.listen(PORT, function () {
     console.log(`The server is running successfully on port: ${PORT}`);
 }); // serverga pass qilinadi
