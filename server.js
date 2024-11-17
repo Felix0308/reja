@@ -1,13 +1,23 @@
 console.log("Web Serverni boshlash");
 const express = require("express");
+const res = require("express/lib/response");
 const app = express();
 const http = require("http");
+const fs = require("fs");
+
+let user;
+fs.readFile("database/user.json", "utf8", (err, data) => {
+  if (err) {
+    console.log("ERROR:", err);
+  } else {
+    user = JSON.parse(data);
+  }
+});
 
 // 1 => Kirish code. expressga kirib kelayotgan ma'lumotlarga bog'liq bo'lgan codelar yoziladi.
 app.use(express.static("public")); // => har qanday browserdan kirib kelayotgan zaproslar uchun public folderlar ochiq degan ma'noni anglatadi. Faqat public folderni ko'ra oladi.
 app.use(express.json()); // => kirib kelayotgan json formatdagi datani object holatiga o'girib beradi. client va webserver orasidagi data json format ko'rinishida.
-app.use(express.urlencoded({extended: true})); // => htmldan traditional form request qilish instrumenti. ya'ni formdan biror nimani post qilsak bizni express serverimiz qabul qilib oladi. agar bu code ni yozmasak html formdan post qilingan narsalarni express qabul qilmaydi, va serverga kiritmaydi.
-
+app.use(express.urlencoded({ extended: true })); // => htmldan traditional form request qilish instrumenti. ya'ni formdan biror nimani post qilsak bizni express serverimiz qabul qilib oladi. agar bu code ni yozmasak html formdan post qilingan narsalarni express qabul qilmaydi, va serverga kiritmaydi.
 
 // 2 => Session code
 
@@ -17,10 +27,14 @@ app.set("view engine", "ejs"); // view engine ajs ekankligini ko'rsatilyapti. ej
 
 // 4 =>Routing code
 app.post("/create-item", (req, res) => {
-  console.log(req);
-  res.json({test: "success" });
+  // console.log(req);
+  // res.json({test: "success" });
+  // TODO: code with db here
 });
 
+app.get("/author", (req, res) => {
+  res.render("author", { user: user });
+});
 app.get("/", function (req, res) {
   res.render("harid");
 });
@@ -37,10 +51,9 @@ app.get("/", function (req, res) {
 const server = http.createServer(app); // http serverimizni qurib olamiz.
 let PORT = 3000; // serverni 3001 PORTga listen qildik
 server.listen(PORT, function () {
-    console.log(`The server is running successfully on port: ${PORT}`);
+  console.log(`The server is running successfully on port: ${PORT}`);
 }); // serverga pass qilinadi
 
 // 'npm start' = aslida 'npm run start'. faqat star so'zi bilan boshlash uchungina node ruxsat beradi. Lekin start scriptdan boshqa barcha starting scriptga run berish shart.
-// .gitignore => bu filega gitimizga yozilishi kerak bo'lmagan narsalarni yozadi: 
+// .gitignore => bu filega gitimizga yozilishi kerak bo'lmagan narsalarni yozadi:
 // - node_modules - katta bo'lganligi uchun yozilmaydi. boshqa komopyuterdan kirganda 'npm install' ni yozgandi node package.jsondagi barcha dependenslarni barchasini internetdan olib instal qilib beradi. shuning uchun proektga yozish shart emas.
-
