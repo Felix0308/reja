@@ -48,7 +48,7 @@ app.get("/", function (req, res) {
 //   res.end(`<h1>Siz sovgalar bolimidasiz</h1>`);
 // });
 
-const server = http.createServer(app); // http serverimizni qurib olamiz.
+const server = http.createServer(app); // http serverimizni qurib olamiz. aynan shu single thread hisoblanadi. userlarni responselari aynan shu yerga keladi.  shu yer
 let PORT = 3000; // serverni 3001 PORTga listen qildik
 server.listen(PORT, function () {
   console.log(`The server is running successfully on port: ${PORT}`);
