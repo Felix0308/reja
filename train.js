@@ -157,4 +157,4 @@ console.log(countLetter("e", "engineer")); // 3 qaytaradi
 
 
 module.exports = countLetter;  // bu orqali bu funksiyani export qilinadi ya'ni boshqa fayllarda ishlatish mumkin.
-// boshqa afaylda require yordamida import qilib foydalaniladi: const countLetter = require('./countLetter')
+// boshqa afaylda require yordamida import qilib foydalaniladi: const countLetter = require('./countLetter').
