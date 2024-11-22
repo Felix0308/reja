@@ -1,3 +1,5 @@
+// // even loop single threaddagi requestlarni trheadlarga bo'lib beradi. kamida 4 ta trhead ishlab turadi
+
 // console.log("Jack Ma maslahatlari");
 // const list = [
 //   "yaxshi talaba boling", // 0-20
@@ -10,7 +12,7 @@
 
 // // *********************************************************************
 // // CALLBACK function :
-// function maslahatBering(a, callback) { //=> callback yasab olinyapti-  a => yosh , callbackga har xil holat qiymatlar berib ko'riladi
+// function maslahatBering(a, callback) { //=> callback function yasab olinyapti-  a => yosh , callbackga har xil holat qiymatlar berib ko'riladi
 //     if (typeof a !== "number") callback("insert a number", null);  // agar type number bo'lmasa error ber deyilyapti. callback(1-errorga tegishli- 'insert number', 2-dataga tegishli(data yuqligi uchun 'null' qo'yildi))
 //     else if (a <= 20) callback(null, list[0]);  // qolgan holatlarda qiymatini solishtirgan holatda callback(1-error 2-javob ya'ni errayga tegishli ma'lumotlarni beradi.)
 //     else if (a > 20 && a <= 30) callback(null, list[1]);  // bu yerda calback(1-data('null), datada 0chi qiymatni qaytaryapmiz('list[0]') )
@@ -18,41 +20,42 @@
 //     else if (a > 40 && a <= 50) callback(null, list[3]);
 //     else if (a > 50 && a <= 60) callback(null, list[4]);
 //     else {
-//         // callback(null, list[5]);
+//         callback(null, list[5]);
 
 //         // bu yerda kechikib javob berishini check qilib ko'rdik
 //         // setTimeout(function () {     // 2 parametr oladi: function, type
 //         //     callback(null, list[5]);
 //         // }, 5000);
 
-//         setInterval(function () {
-//             callback(null, list[5]);
-//         }, 1000);
+//         // setInterval(function () {
+//         //     callback(null, list[5]);
+//         // }, 1000);
 
 //     }
 // }
 
-// // maslahatBering(10, (err, data) => {  //bu callback functionni chaqirishda parametr sifatida function ishga tushadi
-// //     if(err) console.log('ERROR:', err);  // => agar xatolik bo'lsa uni ko'rsat
-// //     console.log('javob:', data);         // => xatolik bo'lmasa datani ko'rsat
-// // });
+// // CALL:
+// maslahatBering(10, (err, data) => {  //bu callback functionni chaqirishda parametr sifatida function ishga tushadi
+//     if(err) console.log('ERROR:', err);  // => agar xatolik bo'lsa uni ko'rsat
+//     console.log('javob:', data);         // => xatolik bo'lmasa datani ko'rsat
+// });
 
-// // maslahatBering(25, (err, data) => {
-// //     if(err) console.log('ERROR:', err);
-// //     console.log('javob:', data);
-// // });
+// maslahatBering(25, (err, data) => {
+//     if(err) console.log('ERROR:', err);
+//     console.log('javob:', data);
+// });
 
-// // maslahatBering("salom", (err, data) => {  // bu yerda error bo'lgani uchun => ERROR:insert a number / javob:null
-// //   if (err) console.log("ERROR:", err);
-// //   console.log("javob:", data);
-// // });
+// maslahatBering("salom", (err, data) => {  // bu yerda error bo'lgani uchun => ERROR:insert a number / javob:null
+//   if (err) console.log("ERROR:", err);
+//   console.log("javob:", data);
+// });
 
-// // maslahatBering("salom", (err, data) => {  // => xatolikni ko'rsatadi yoki qaytargan qiymatni
-// //   if (err) console.log("ERROR:", err);
-// //   else {
-// //     console.log("javob:", data);
-// //   }
-// // });
+// maslahatBering("salom", (err, data) => {  // => xatolikni ko'rsatadi yoki qaytargan qiymatni
+//   if (err) console.log("ERROR:", err);
+//   else {
+//     console.log("javob:", data);
+//   }
+// });
 
 // console.log("passed here 0");
 
@@ -64,73 +67,79 @@
 // });
 // console.log("passed here 1");
 
-// // yuqoridagi setTime ishlatilgani va bu singlethread bo'lagi uchun kutmasdan birinchi tayyor javobni chiqarib keyin qolganini chiqaryapti.
-// // callback functionlarni => aynan band qilmaslik uchun ishlatiladi
-// // har doim run qilmaslik uchun package.jsonda starting script yozamiz: "train": "nodemon train.js"
+// yuqoridagi setTime ishlatilgani va bu singlethread bo'lagi uchun kutmasdan birinchi tayyor javobni chiqarib keyin qolganini chiqaryapti.
+// callback functionlarni => aynan band qilmaslik uchun ishlatiladi
+// har doim run qilmaslik uchun package.jsonda starting script yozamiz: "train": "nodemon train.js"
 
-// // ********************************************************************************************************
-// // ASYNC function:
+// *********************************************************************
+// ASYNC function:
 
-// // defination:
-// // async function maslahatBering(a) {
-// //   if (typeof a !== "number")
-// //     throw new Error(
-// //       "insert a number"
-// //     ); // qachonki Error kerak bo'lsa uni 'throw' qilishimiz kerak.
-// //   else if (a <= 20) return list[0];
-// //   else if (a > 20 && a <= 30) return list[1];
-// //   else if (a > 30 && a <= 40) return list[2];
-// //   else if (a > 40 && a <= 50) return list[3];
-// //   else if (a > 50 && a <= 60) return list[4];
-// //   else {
-// //     return list[5];
-// //     return new Promise((resolve, reject) => {  // promise functionlar ham mavjud va unda setTimeout/ setInterval yaxshi ishlaydi, asyncs functiondan farqi ham shunda.
+// defination:
+// async function maslahatBering(a) {
+//   if (typeof a !== "number")
+//     throw new Error(
+//       "insert a number"
+//     ); // qachonki Error kerak bo'lsa uni 'throw' qilishimiz kerak.
+//   else if (a <= 20) return list[0];
+//   else if (a > 20 && a <= 30) return list[1];
+//   else if (a > 30 && a <= 40) return list[2];
+//   else if (a > 40 && a <= 50) return list[3];
+//   else if (a > 50 && a <= 60) return list[4];
+//   else {
+//     return list[5];
+//     return new Promise((resolve, reject) => {  // promise functionlar ham mavjud va unda setTimeout/ setInterval yaxshi ishlaydi, asyncs functiondan farqi ham shunda.
       
-// //       setTimeout(() => {
-// //         resolve(list[5]);
-// //       }, 5000);
-// //     });
-// //     // setTimeout(function () {  // asyncs functionda setTime() setInterval() kabi core modullar ishlamaydi.
+//       setTimeout(() => {
+//         resolve(list[5]);
+//       }, 5000);
+//     });
+//     // setTimeout(function () {  // asyncs functionda setTime() setInterval() kabi core modullar ishlamaydi.
 
-// //     //   return list[5];
-// //     // }, 5000);
-// //   }
-// // }
+//     //   return list[5];
+//     // }, 5000);
+//   }
+// }
 
-// // ********************************************
-// // CALL via then/catch
-// // console.log("passed here 0");
-// // maslahatBering(25)                 // => bu yerga 'a' ni qiymati berilyapti
-// //   .then((data) => {                // => agar hech qanday xatolik bo'lmasa datani shu yerda qabul qilinadi, xatolik bo'lsa bu ishlamaydi, keyingiisga o'tadi
-// //     console.log("javob:", data);
-// //   })
-// //   .catch((err) => {                // => bu bizga xatolikni ushlab oladi va bizga beradi
-// //     console.log("ERROR:", err);
-// //   });
-// // console.log("passed here 1");
+// *****************************************
+// CALL via then/catch
+// console.log("passed here 0");
+// maslahatBering(25)                 // => bu yerga 'a' ni qiymati berilyapti
+//   .then((data) => {                // => agar hech qanday xatolik bo'lmasa datani shu yerda qabul qilinadi, xatolik bo'lsa bu ishlamaydi, keyingiisga o'tadi
+//     console.log("javob:", data);
+//   })
+//   .catch((err) => {                // => bu bizga xatolikni ushlab oladi va bizga beradi
+//     console.log("ERROR:", err);
+//   });
+// console.log("passed here 1");
 
-// // ASYNC function - sync functionlar to'liq ishga tushib bo'lgach, async function natijalari bilan node.js ishlay boshlaydi.
-// // shuning uchun ham Async functionlar 'single thread'ni band qilmaydi. ya'ni operatsiyalarni event loop orqali thread poolga tashlayveradi.
-// // Bu single threadni band qilmaydigon taype xisoblanadi.
+// ASYNC function - sync functionlar to'liq ishga tushib bo'lgach, async function natijalari bilan node.js ishlay boshlaydi.
+// shuning uchun ham Async functionlar 'single thread'ni band qilmaydi. ya'ni operatsiyalarni event loop orqali thread poolga tashlayveradi.
+// Bu single threadni band qilmaydigon type xisoblanadi.
 
-// // **********************************************
-// // Yoki then/ catch ni o'rniga async functionni call qismida ham ishlatib ko'rishimiz mumkin.
-// // bu esa callback promise/promise halldan qutilishga yordam beradi. bu maydon vazifasini yasab beradi
-// //  async via async/await orqali qurib oldik. bu esa sourceni tiniq sodda yozilishiga olib keladi.
+// **************************************************************************************************
+// Yoki then/ catch ni o'rniga async functionni call qismida ham ishlatib ko'rishimiz mumkin.
+// bu esa callback promise/promise halldan qutilishga yordam beradi. bu maydon vazifasini yasab beradi
+//  async via async/await orqali qurib oldik. bu esa sourceni tiniq sodda yozilishiga olib keladi.
 
-// // async function run() {
-// //   let javob = await maslahatBering(25); // => await - kutadi, javob olmaguncha keyingisiga o'tmaydi.
-// //   console.log(javob);
-// //   javob = await maslahatBering(70);
-// //   console.log(javob);
-// //   javob = await maslahatBering(41);
-// //   console.log(javob);
-// // }
-// // run();
+// async function run() {
+//   let javob = await maslahatBering(25); // => await - kutadi, javob olmaguncha keyingisiga o'tmaydi.
+//   console.log(javob);
+//   javob = await maslahatBering(70);
+//   console.log(javob);
+//   javob = await maslahatBering(41);
+//   console.log(javob);
+// }
+// run();
 
-// // odatda async function ishlatganda try catch ishlatish kerak.
-// // promise all degani bor arraylarni mapi bilan juda ajoyib ishlaydi.
+// odatda async function ishlatganda try catch ishlatish kerak.
+// promise all degani bor arraylarni mapi bilan juda ajoyib ishlaydi.
 
+// Pattern nima va u nech xil turga bo'linadi?
+// Pattern (dasturlashda shablon) - bu muayyan muammo yoki vazifani hal qilish uchun takrorlanadigan va keng qo'llaniladigan yechimlar to'plamidir. Patternlar asosan quyidagi turkumlarga bo'linadi:
+
+// Creational patterns: Ob'ektlarni yaratish usullarini o'zgartirish (masalan, Singleton, Factory).
+// Structural patterns: Tizimlar orasidagi bog'lanishni boshqarish (masalan, Adapter, Composite).
+// Behavioral patterns: Ob'ektlar va klasslar o'rtasidagi o'zaro aloqalarni boshqarish (masalan, Observer, Strategy).
 
 //****************************************************************************************** */
 // homework:
@@ -139,22 +148,43 @@
 // Birinchi parametr bitta harf (harf) bo'ladi, ikkinchi parametr esa string (jumla). 
 // Funksiya birinchi parametrdagi harfning ikkinchi parametrdagi jumla ichida necha marta uchrashishini qaytaradi.
 
-// countLetter funksiyasi: 
-// Birinchi parametrdagi harfning ikkinchi parametrdagi string ichidagi ishtirokini hisoblaydi.
-function countLetter(harf, jumla) {
-    if (typeof harf !== 'string' ||  // harfni type string bo'lmasa - Error
-      typeof jumla !== 'string' ||  // jumlani type string bo'lmasa - Error
-      harf.length !== 1) {          // harfni uzunligi 1tadan ko'p yoki kam bo'lsa -Error
-        throw new Error("1-parametr harf va 2-parametr string bo'lishi kerak."); // agar shartlar bajarilmasa shu habar chiqadi
-    }
-    return jumla.split(harf).length - 1; // Harfni string ichida sanash
+// // countLetter funksiyasi: 
+// // Birinchi parametrdagi harfning ikkinchi parametrdagi string ichidagi ishtirokini hisoblaydi.
+// function countLetter(harf, jumla) {
+//     if (typeof harf !== 'string' ||  // harfni type string bo'lmasa - Error
+//       typeof jumla !== 'string' ||  // jumlani type string bo'lmasa - Error
+//       harf.length !== 1) {          // harfni uzunligi 1tadan ko'p yoki kam bo'lsa -Error
+//         throw new Error("1-parametr harf va 2-parametr string bo'lishi kerak."); // agar shartlar bajarilmasa shu habar chiqadi
+//     }
+//     return jumla.split(harf).length - 1; // Harfni string ichida sanash
+// }
+
+// // Funksiyani test qilish
+// console.log(countLetter("e", "engineer")); // 3 qaytaradi
+// // console.log(countLetter("eb", "engineer")); // Error
+// // console.log(countLetter("a", "engineer")); // 0 qaytaradi
+
+
+// module.exports = countLetter;  // bu orqali bu funksiyani export qilinadi ya'ni boshqa fayllarda ishlatish mumkin.
+// // boshqa afaylda require yordamida import qilib foydalaniladi: const countLetter = require('./countLetter').
+
+
+// DEFINE
+function qoldiqBolish(a, b, callback) {
+  if (b === 0) {
+    callback("Mahraj nolga teng bolmasin!", null);
+  } else {
+    const c = a % b;
+    callback(null, c);
+  }
 }
 
-// Funksiyani test qilish
-console.log(countLetter("e", "engineer")); // 3 qaytaradi
-// console.log(countLetter("eb", "engineer")); // Error
-// console.log(countLetter("a", "engineer")); // 0 qaytaradi
-
-
-module.exports = countLetter;  // bu orqali bu funksiyani export qilinadi ya'ni boshqa fayllarda ishlatish mumkin.
-// boshqa afaylda require yordamida import qilib foydalaniladi: const countLetter = require('./countLetter').
+// CALL
+qoldiqBolish(10, 3, (err, data) => {
+  if (err) {
+    console.log("ERROR:", err);
+  } else {
+    console.log("data:", data);
+    console.log("ANY LOGIC");
+  }
+});
