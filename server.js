@@ -4,7 +4,7 @@ const mongodb = require("mongodb");
 
 let db;
 const connectionString =
-  "mongodb+srv://utkirbekm0327:19950327bek@cluster0.midoa.mongodb.net/";
+  "mongodb+srv://utkirbekm0327:19950327bek@cluster0.midoa.mongodb.net/Reja?retryWrites=true&w=majority&appName=Cluster0";
 
 mongodb.connect(
   connectionString,
@@ -16,7 +16,7 @@ mongodb.connect(
     if (err) console.log("ERROR on connection MongoDB");
     else {
       console.log("MongoDB connection succeed");
-      module.exports = client;
+      module.exports = client; // clientni server js filemizdan export qilib oldik, clientni qayta-qayta ishlatish uchun
       //   console.log(client); // clientda nimalar borligini ko'rdik
       const app = require("./app");
       const server = http.createServer(app);

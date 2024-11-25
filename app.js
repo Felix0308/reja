@@ -5,8 +5,8 @@ const app = express();
 
 // const fs = require("fs");
 
-// MongoDB connect
-const db = require("./server").db();
+// MongoDB choqirish
+const db = require("./server").db(); // MongoDB object ini qurub olamiz va bu orqali databasega turli xil ma'lumotlarni yozish, o'qish, o'chirish operatsiyalarni amalga oshirishimiz mumkin
 
 // let user;
 // fs.readFile("database/user.json", "utf8", (err, data) => {
@@ -30,18 +30,40 @@ app.set("view engine", "ejs"); // view engine ajs ekankligini ko'rsatilyapti. ej
 
 // 4 =>Routing code
 app.post("/create-item", (req, res) => {
-  // console.log(req);
+  console.log("user entered /create-item");
+  console.log(req.body);
+  // res.end("success");
+  const new_reja = req.body.reja;
+  db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
+    if (err) {
+      console.log("something went wrong");
+    } else {
+      res.end("successfully added");
+    }
+  });
+
   // res.json({test: "success" });
   // TODO: code with db here
 });
 
-app.get("/author", (req, res) => {
-  res.render("author", { user: user });
-});
+// app.get("/author", (req, res) => {
+//   res.render("author", { user: user });
+// });
 app.get("/", function (req, res) {
-  res.render("reja");
-});
+  console.log("user entered /");
 
+  db.collection("plans")
+    .find()
+    .toArray((err, data) => {
+      if (err) {
+        console.log(err);
+        res.end("something went wrong");
+      } else {
+        // console.log(data);
+        res.render("reja", { items: data });
+      }
+    });
+});
 
 module.exports = app;
 // app.get("/hello", function(req, res) {
@@ -52,7 +74,6 @@ module.exports = app;
 //   // res.end(`<h1 style="background: red">HELLO WORLD by Utkirbek</h1>`);
 //   res.end(`<h1>Siz sovgalar bolimidasiz</h1>`);
 // });
-
 
 // 'npm start' = aslida 'npm run start'. faqat star so'zi bilan boshlash uchungina node ruxsat beradi. Lekin start scriptdan boshqa barcha starting scriptga run berish shart.
 // .gitignore => bu filega gitimizga yozilishi kerak bo'lmagan narsalarni yozadi:
@@ -73,3 +94,16 @@ module.exports = app;
 // API methodlari :  get & post
 // middleware dizayn pattern : dizayn & architicture
 // fronend developer => bssr (ejs) & SPI -single page aplicataion (react) traditional yo'l bilan quriladi frontend alohida backend alohida
+
+// B - TASK
+//  function countDigits(str) {
+//     let count = 0;
+//     for (let char of str) {
+//         if (char >= '0' && char <= '9') count++;
+//     }
+//     return count;
+// }
+
+// // Funksiyani chaqirish
+// const result = countDigits("ad2a54y79wet0sfgb9");
+// console.log(result); // Natija: 7

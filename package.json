@@ -16,5 +16,8 @@
     "express": "^4.21.1",
     "mongodb": "^3.2.6",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "ejs-lint": "^2.0.1"
   }
 }
