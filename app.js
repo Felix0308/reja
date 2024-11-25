@@ -95,6 +95,7 @@ module.exports = app;
 // middleware dizayn pattern : dizayn & architicture
 // fronend developer => bssr (ejs) & SPI -single page aplicataion (react) traditional yo'l bilan quriladi frontend alohida backend alohida
 
+// ********************************************************************************************************
 // B - TASK
 //  function countDigits(str) {
 //     let count = 0;
