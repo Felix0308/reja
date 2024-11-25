@@ -7,6 +7,7 @@ const app = express();
 
 // MongoDB choqirish
 const db = require("./server").db(); // MongoDB object ini qurub olamiz va bu orqali databasega turli xil ma'lumotlarni yozish, o'qish, o'chirish operatsiyalarni amalga oshirishimiz mumkin
+const mongodb = require("mongodb");
 
 // let user;
 // fs.readFile("database/user.json", "utf8", (err, data) => {
@@ -49,6 +50,17 @@ app.post("/create-item", (req, res) => {
   // TODO: code with db here
 });
 
+app.post("/delete-item", (req, res) => {
+  const id = req.body.id;
+  db.collection("plans").deleteOne(
+    { _id: new mongodb.ObjectId(id) },
+    function (err, data) {
+      res.json({ state: "success" });
+    }
+  );
+  // console.log(id);
+  // res.end("done");
+});
 // app.get("/author", (req, res) => {
 //   res.render("author", { user: user });
 // });
@@ -99,7 +111,7 @@ module.exports = app;
 // fronend developer => bssr (ejs) & SPI -single page aplicataion (react) traditional yo'l bilan quriladi frontend alohida backend alohida
 
 // ********************************************************************************************************
-// B - TASK
+// // B - TASK
 //  function countDigits(str) {
 //     let count = 0;
 //     for (let char of str) {

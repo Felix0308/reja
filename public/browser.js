@@ -33,7 +33,32 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
       createField.focus();
     })
     .catch((err) => {
-        console.log("Iltimos qaytadan harakat qiling!");
+      console.log("Iltimos qaytadan harakat qiling!");
     });
-    
+});
+
+document.addEventListener("click", function (e) {
+  // delete operations
+  console.log(e.target);
+  if (e.target.classList.contains("delete-me")) {
+    if (confirm("Aniq ochirmoqchimisz?")) {
+      axios
+        .post("/delete-item", { id: e.target.getAttribute("data-id") })
+        .then((respose) => {
+            console.log(respose.data);
+            e.target.parentElement.parentElement.remove();
+        })
+        .catch((err) => {
+            console.log("Iltimos qaytadan harakat qiling!");
+            
+        });
+      //     alert("Yes deb javob berildi");
+      // } else {
+      //     alert("No deb javob berildi")
+    }
+  }
+  // edit operations
+  if (e.target.classList.contains("edit-me")) {
+    alert("siz edit tugmasini bosdingiz");
+  }
 });
