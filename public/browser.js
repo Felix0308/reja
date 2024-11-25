@@ -35,4 +35,5 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
     .catch((err) => {
         console.log("Iltimos qaytadan harakat qiling!");
     });
+    
 });
