@@ -90,36 +90,3 @@ module.exports = app;
 //   res.end(`<h1>Siz sovgalar bolimidasiz</h1>`);
 // });
 
-// 'npm start' = aslida 'npm run start'. faqat star so'zi bilan boshlash uchungina node ruxsat beradi. Lekin start scriptdan boshqa barcha starting scriptga run berish shart.
-// .gitignore => bu filega gitimizga yozilishi kerak bo'lmagan narsalarni yozadi:
-// - node_modules - katta bo'lganligi uchun yozilmaydi. boshqa komopyuterdan kirganda 'npm install' ni yozgandi node package.jsondagi barcha dependenslarni barchasini internetdan olib instal qilib beradi. shuning uchun proektga yozish shart emas.
-
-// packaje.jyson => loyihani yuragi.
-// pdependence va devdepense ko'rinishdagi packages
-// starting enpointlar => boshlab beruvchi comandalar
-// npm run dev => package.jsonadagi devga bog'langan nodemon orqali serverni ishga tushirib beryapti
-// server.js => loyihani o'zagi
-// express => backend serverni ishga tushirib beradigon framework
-// backend server => restoran misolida, vazifasi frontendga xizmat qiladi.backend to'liq yopiq bo'lib api lar bilan tashqariga xizmat qiladi.
-// api lar tashqi olamga ochiq bo'ladi:  app.use /app.set /app.post / app.get/
-// paradigma => OOP & function programmer
-// express 4 qismdan iborat: kirish codeb & session code & views code & routing code
-// api request turlari : traditional & rest api & graphicquel
-// api strukturasi bo'yicha turlari: header & body
-// API methodlari :  get & post
-// middleware dizayn pattern : dizayn & architicture
-// fronend developer => bssr (ejs) & SPI -single page aplicataion (react) traditional yo'l bilan quriladi frontend alohida backend alohida
-
-// ********************************************************************************************************
-// // B - TASK
-//  function countDigits(str) {
-//     let count = 0;
-//     for (let char of str) {
-//         if (char >= '0' && char <= '9') count++;
-//     }
-//     return count;
-// }
-
-// // Funksiyani chaqirish
-// const result = countDigits("ad2a54y79wet0sfgb9");
-// console.log(result); // Natija: 7

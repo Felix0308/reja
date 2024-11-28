@@ -88,7 +88,7 @@
 //   else {
 //     return list[5];
 //     return new Promise((resolve, reject) => {  // promise functionlar ham mavjud va unda setTimeout/ setInterval yaxshi ishlaydi, asyncs functiondan farqi ham shunda.
-      
+
 //       setTimeout(() => {
 //         resolve(list[5]);
 //       }, 5000);
@@ -142,21 +142,26 @@
 // Behavioral patterns: Ob'ektlar va klasslar o'rtasidagi o'zaro aloqalarni boshqarish (masalan, Observer, Strategy).
 
 //****************************************************************************************** */
+
 // homework:
 
-// Bizga ikkita  parametrli countLetter funksiyasini yaratish kerak. 
-// Birinchi parametr bitta harf (harf) bo'ladi, ikkinchi parametr esa string (jumla). 
+// A-TASK
+// Bizga ikkita  parametrli countLetter funksiyasini yaratish kerak.
+// Birinchi parametr bitta harf (harf) bo'ladi, ikkinchi parametr esa string (jumla).
 // Funksiya birinchi parametrdagi harfning ikkinchi parametrdagi jumla ichida necha marta uchrashishini qaytaradi.
 
-// // countLetter funksiyasi: 
-// // Birinchi parametrdagi harfning ikkinchi parametrdagi string ichidagi ishtirokini hisoblaydi.
+// // countLetter funksiyasi:
+// Birinchi parametrdagi harfning ikkinchi parametrdagi string ichidagi ishtirokini hisoblaydi.
 // function countLetter(harf, jumla) {
-//     if (typeof harf !== 'string' ||  // harfni type string bo'lmasa - Error
-//       typeof jumla !== 'string' ||  // jumlani type string bo'lmasa - Error
-//       harf.length !== 1) {          // harfni uzunligi 1tadan ko'p yoki kam bo'lsa -Error
-//         throw new Error("1-parametr harf va 2-parametr string bo'lishi kerak."); // agar shartlar bajarilmasa shu habar chiqadi
-//     }
-//     return jumla.split(harf).length - 1; // Harfni string ichida sanash
+//   if (
+//     typeof harf !== "string" || // harfni type string bo'lmasa - Error
+//     typeof jumla !== "string" || // jumlani type string bo'lmasa - Error
+//     harf.length !== 1
+//   ) {
+//     // harfni uzunligi 1tadan ko'p yoki kam bo'lsa -Error
+//     throw new Error("1-parametr harf va 2-parametr string bo'lishi kerak."); // agar shartlar bajarilmasa shu habar chiqadi
+//   }
+//   return jumla.split(harf).length - 1; // Harfni string ichida sanash
 // }
 
 // // Funksiyani test qilish
@@ -164,27 +169,56 @@
 // // console.log(countLetter("eb", "engineer")); // Error
 // // console.log(countLetter("a", "engineer")); // 0 qaytaradi
 
-
-// module.exports = countLetter;  // bu orqali bu funksiyani export qilinadi ya'ni boshqa fayllarda ishlatish mumkin.
+// module.exports = countLetter; // bu orqali bu funksiyani export qilinadi ya'ni boshqa fayllarda ishlatish mumkin.
 // // boshqa afaylda require yordamida import qilib foydalaniladi: const countLetter = require('./countLetter').
 
+// // DEFINE
+// function qoldiqBolish(a, b, callback) {
+//   if (b === 0) {
+//     callback("Mahraj nolga teng bolmasin!", null);
+//   } else {
+//     const c = a % b;
+//     callback(null, c);
+//   }
+// }
 
-// DEFINE
-function qoldiqBolish(a, b, callback) {
-  if (b === 0) {
-    callback("Mahraj nolga teng bolmasin!", null);
-  } else {
-    const c = a % b;
-    callback(null, c);
-  }
+// // CALL
+// qoldiqBolish(10, 3, (err, data) => {
+//   if (err) {
+//     console.log("ERROR:", err);
+//   } else {
+//     console.log("data:", data);
+//     console.log("ANY LOGIC");
+//   }
+// });
+
+// ********************************************************************************************************
+
+// // B - TASK
+//Shunday function tuzing, u 1ta string parametrga ega bolsin, hamda osha stringda qatnashgan raqamlarni sonini bizga return qilsin.
+// MASALAN countDigits("ad2a54y79wet0sfgb9") 7ni return qiladi.
+
+//  function countDigits(str) {
+//     let count = 0;
+//     for (let char of str) {
+//         if (char >= '0' && char <= '9') count++;
+//     }
+//     return count;
+// }
+
+// // Funksiyani chaqirish
+// const result = countDigits("ad2a54y79wet0sfgb9");
+// console.log(result); // Natija: 7
+
+// ********************************************************************************************************
+// C-TASK
+// Shunday function tuzing, u 2ta string parametr ega bolsin, hamda agar har ikkala string bir hil harflardan iborat bolsa true aks holda false qaytarsin
+// MASALAN checkContent("mitgroup", "gmtiprou") return qiladi true;
+
+function checkContent(str1, str2) {
+  return str1.split("").sort().join("") === str2.split("").sort().join("");
 }
 
-// CALL
-qoldiqBolish(10, 3, (err, data) => {
-  if (err) {
-    console.log("ERROR:", err);
-  } else {
-    console.log("data:", data);
-    console.log("ANY LOGIC");
-  }
-});
+// call
+console.log(checkContent("mitgroup", "gmtiprou"));  // true
+console.log(checkContent("hello", "world"));        // false
