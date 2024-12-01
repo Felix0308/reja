@@ -1,4 +1,4 @@
-console.log("FrontEnd JS ishga tushdi");
+console.log("FrontEnd JS ishga tushdi"); // => frontend javascript
 
 function itemTemplate(item) {
   return `<li
@@ -45,12 +45,11 @@ document.addEventListener("click", function (e) {
       axios
         .post("/delete-item", { id: e.target.getAttribute("data-id") })
         .then((respose) => {
-            console.log(respose.data);
-            e.target.parentElement.parentElement.remove();
+          console.log(respose.data);
+          e.target.parentElement.parentElement.remove();
         })
         .catch((err) => {
-            console.log("Iltimos qaytadan harakat qiling!");
-            
+          console.log("Iltimos qaytadan harakat qiling!");
         });
       //     alert("Yes deb javob berildi");
       // } else {
@@ -59,6 +58,37 @@ document.addEventListener("click", function (e) {
   }
   // edit operations
   if (e.target.classList.contains("edit-me")) {
-    alert("siz edit tugmasini bosdingiz");
+    // alert("siz edit tugmasini bosdingiz");
+    let userInput = prompt(
+      "O'zgartirish kiriting",
+      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+    );
+    if (userInput) {
+      // console.log(userInput);
+      axios
+        .post("/edit-item", {
+          id: e.target.getAttribute("data-id"),
+          new_input: userInput,
+        })
+        .then((response) => {
+          console.log(response.data);
+          e.target.parentElement.parentElement.querySelector(
+            ".item-text"
+          ).innerHTML = userInput;
+        })
+        .catch((err) => {
+          console.log("Iltimos qaytadan harakat qiling!");
+          
+        });
+    }
   }
+});
+
+document.getElementById("clean-all").addEventListener("click", function () {
+  axios.post("/delete-all", { delete_all: true }).then((respose) => {
+    // console.log(respose.data);
+    alert(respose.data.state);
+    document.location.reload();
+     
+  });
 });
