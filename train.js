@@ -289,16 +289,34 @@
 // agar stringda bir hil harf qatnashgan bolsa true, qatnashmasa false qaytarishi kerak.
 // MASALAN: getReverse("hello") return true 
 
-function findDoublers(str) {
-    for (let letter of str) { 
-        if (str.indexOf(letter) !== str.lastIndexOf(letter)) {
-            return true; 
-        }
-    }
-    return false; 
+// function findDoublers(str) {
+//     for (let letter of str) { 
+//         if (str.indexOf(letter) !== str.lastIndexOf(letter)) {
+//             return true; 
+//         }
+//     }
+//     return false; 
+// }
+
+// // call
+// console.log(findDoublers("hello"));   //=> true
+
+
+// ***************************************************************
+// G-TASK: 
+
+// Shunday function tuzingki unga integerlardan iborat array pass bolsin va 
+// function bizga osha arrayning eng katta qiymatiga tegishli birinchi indexni qaytarsin.
+// MASALAN: getHighestIndex([5, 21, 12, 21, 8]) return qiladi 1 sonini.
+
+function getHighestIndex(arr) {
+    if (arr.length === 0) return -1; 
+
+    const maxValue = Math.max(...arr);
+    return arr.indexOf(maxValue);
 }
 
 // call
-console.log(findDoublers("hello"));   //=> true
-
-
+console.log(getHighestIndex([5, 21, 12, 21, 8])); 
+console.log(getHighestIndex([3, 8, 8, 2]));       
+console.log(getHighestIndex([]));                 
