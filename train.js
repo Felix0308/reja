@@ -309,14 +309,31 @@
 // function bizga osha arrayning eng katta qiymatiga tegishli birinchi indexni qaytarsin.
 // MASALAN: getHighestIndex([5, 21, 12, 21, 8]) return qiladi 1 sonini.
 
-function getHighestIndex(arr) {
-    if (arr.length === 0) return -1; 
+// function getHighestIndex(arr) {
+//     if (arr.length === 0) return -1; 
 
-    const maxValue = Math.max(...arr);
-    return arr.indexOf(maxValue);
+//     const maxValue = Math.max(...arr);
+//     return arr.indexOf(maxValue);
+// }
+
+// // call
+// console.log(getHighestIndex([5, 21, 12, 21, 8])); 
+// console.log(getHighestIndex([3, 8, 8, 2]));       
+// console.log(getHighestIndex([]));                 
+
+// **********************************************************************
+// TASK H:
+
+// Raqamlardan iborat arrayni argument sifatida qabul qiladigan
+// function tuzing. Ushbu function faqatgina positive sonlarni olib
+// string holatida return qilsin.
+// MASALAN: getPositive([1, -4, 2]) return qiladi "12".
+
+function getPositive(arr) {
+    return arr.filter(num => num > 0).join("");
 }
 
-// call
-console.log(getHighestIndex([5, 21, 12, 21, 8])); 
-console.log(getHighestIndex([3, 8, 8, 2]));       
-console.log(getHighestIndex([]));                 
+console.log(getPositive([1, -4, 2]));         // "12" bu yerda 1 va 2 musbat son bo'lgani uchun ularni birlashtirib berdi
+// console.log(getPositive([-1, -2, -3]));    // "" bu yerda musbat son yo'q, hammasi manfiy
+// console.log(getPositive([5, 0, 10]));      // "510" barchasi musbat son
+// console.log(getPositive([]));              // "" bu bo'sh array bo'lgani uchun
